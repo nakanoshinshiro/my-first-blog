@@ -1,16 +1,12 @@
-<html>
-<head>
-    <title>戯言ブログ</title>
-  </head>
-<body>
-  <div>
-      <h1><a href="/">Django Girls Blog</a></h1>
+{% extends 'blog/base.html' %}
+{% block content %}
+{% for post in posts %}
+<div class="post">
+  <div class="date">
+    <p>published: {{ post.published_date }}</p>
   </div>
-  <div>
-    <p>公開日：2020/04//27, 11:12</p>
-    <h2><a href ="">1番目の投稿</a></h2>
-    <p>誰かと話すって心地いいのね。知らなかった</p>
-    <p>大人はさ、ズルイぐらいがちょうどいいんだ</p>
-  </div>
-</body>
-</html>
+  <h2><a href="{% url "post_detail" pk=post.pk %}">{{ post.title }}</a></h2>
+  <p>{{ post.text|linebreaksbr }}</p>
+</div>
+{% endfor %}
+{% endblock %}
